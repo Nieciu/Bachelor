@@ -1,6 +1,6 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
-    path('', views.login)
+    path('login/', LoginView.as_view(template_name='todolist/login.html'), name='login')
 ]
