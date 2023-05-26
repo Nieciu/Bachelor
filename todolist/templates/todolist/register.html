@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'todolist/login.css' %}">
+{% endblock  %}
+
+{% block content %}
+
+{% include 'includes/navbar.html' %}
+
 {% if next %}
     {% if user.is_authenticated %}
         <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
@@ -9,6 +19,7 @@
 {% endif %}
 
 <form method="post" action="{% url 'register' %}">
+    <h3>Give data to register</h3>
     {% csrf_token %}
     <table>
         <tr>
@@ -16,17 +27,28 @@
             <td>{{ form.username }}</td>
         </tr>
         <tr>
+            <td></td>
+            <td><p class="error-message">{{ form.username.errors}}</p></td>
+        </tr>
+        <tr>
             <td>{{ form.password1.label_tag }}</td>
             <td>{{ form.password1 }}</td>
         </tr>
         <tr>
+            <td></td>
+            <td><p class="error-message">{{ form.password1.errors}}</p></td>
+        </tr>
+        <tr>
             <td>{{ form.password2.label_tag }}</td>
             <td>{{ form.password2 }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><p class="error-message">{{ form.password2.errors}}</p></td>
+            </tr>
         </tr>
     </table>
-    {% if form.errors %}
-        <p>{{ form.errors }}</p>
-    {% endif %}
     <input type="submit" value="Register">
     <input type="hidden" name="next" value="{{ next }}">
 </form>
+{% endblock  %}

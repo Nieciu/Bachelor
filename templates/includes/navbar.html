@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'includes/navbar.css' %}">
+{% endblock  %}
+
+<ul class="navbar">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'features' %}">Features</a></li>
+    <li class="right register"><a href="{% url 'register' %}">Register</a></li>
+    <li class="right"><a href="{% url 'login' %}">Login</a></li>
+</ul>

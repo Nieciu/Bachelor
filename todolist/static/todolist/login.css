@@ -1,20 +1,3 @@
-/* CSS styles for the login form */
-
-/* Center the form horizontally */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Add some spacing between the form elements */
-  table {
-    margin-bottom: 10px;
-  }
-  
- /* CSS styles for the login form */
-
-/* Center the form horizontally */
 form {
     display: flex;
     flex-direction: column;
@@ -25,6 +8,10 @@ form {
   /* Add some spacing between the form elements */
   table {
     margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #f2f2f2;
   }
   
   /* Style the form input fields */
@@ -36,18 +23,23 @@ form {
     width: 300px;
   }
   
-  /* Style the form submit button */
-  input[type="submit"] {
+/* Style the form submit button */
+input[type="submit"] {
     padding: 12px 20px;
-    background-color: #4CAF50;
+    background-color: #993399;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
   }
   
-  /* Display error messages in red */
+  input[type="submit"]:hover {
+    background-color: #c653c6;
+  }
+  
   p.error-message {
     color: red;
     margin-top: 10px;
@@ -59,14 +51,6 @@ form {
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  /* Style the login page container */
-  .login-container {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Style the page title */
