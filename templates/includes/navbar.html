@@ -7,6 +7,11 @@
 <ul class="navbar">
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'features' %}">Features</a></li>
+    {% if user.is_authenticated %}
+    <li class="right register"><a href="{% url 'logout' %}">Logout</a></li>
+    <li class="right"><span>Logged in as {{user.username}} |</span></li>
+    {% else %}
     <li class="right register"><a href="{% url 'register' %}">Register</a></li>
     <li class="right"><a href="{% url 'login' %}">Login</a></li>
+    {% endif %}
 </ul>
