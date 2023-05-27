@@ -1,0 +1,12 @@
+center a {
+    display: block;
+    color: rgba(27, 27, 27, 0.827);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    
+  }
+
+a:hover {
+    background-color: #c653c6;
+  }

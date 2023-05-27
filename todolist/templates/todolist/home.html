@@ -2,6 +2,22 @@
 
 {% load static %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'todolist/home.css' %}">
+{% endblock  %}
+
 {% block content %}
-<h1>Home page</h1>
+<center>
+    <h3><a href="{% url 'create-list' %}">ADD NEW PROJECT</a></h3>
+</center>
+
+<center>
+    <h3>YOUR LATEST PROJECTS:</h3>
+</center>
+
+<center>
+    <h3><a href="{% url 'all-lists' %}">ALL YOUR PROJECTS</a></h3>
+</center>
+    
+
 {% endblock  %}

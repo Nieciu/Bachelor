@@ -5,10 +5,13 @@ ul.navbar {
     overflow: hidden;
     background-color: #686868;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
   }
 
   ul.navbar li {
     float: left;
+    margin: auto;
   }
 
   ul.navbar li a {
@@ -23,19 +26,8 @@ ul.navbar {
     background-color: #c653c6;
     border-radius: 5px;
   }
-
-  ul.navbar li.right {
-    float: right;
-  }
-
+  
   ul.navbar li.register {
     background-color: #993399;
     border-radius: 5px;
-  }
-
-  ul.navbar span {
-
-    padding: 14px 16px;
-    text-align: center;
-    margin-top: 14px;
   }
