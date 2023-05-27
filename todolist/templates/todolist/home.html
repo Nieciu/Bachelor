@@ -13,6 +13,11 @@
 
 <center>
     <h3>YOUR LATEST PROJECTS:</h3>
+    <div>
+        {% for list in lists %}
+            {% include 'todolist/project_small.html' %}
+        {% endfor %}
+    </div>
 </center>
 
 <center>

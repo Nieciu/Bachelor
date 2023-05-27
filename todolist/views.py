@@ -5,20 +5,25 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from .forms import ToDoListForm
+from .models import ToDoList
+from django.core.exceptions import PermissionDenied
 
 @login_required(login_url="/login")
 def home(request):
-    return render(request, 'todolist/home.html')
+    lists = ToDoList.objects.filter(author=request.user).order_by("-updated_at")[:3]
+    return render(request, 'todolist/home.html',{
+        'lists': lists,
+    })
 
 @login_required(login_url="/login")
 def create_list(request):
     if request.method == 'POST':
         form = ToDoListForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect("/home")
+            lista = form.save(commit=False)
+            lista.author = request.user
+            lista.save()
+            return redirect(home)
     else:
         form = ToDoListForm()
 
@@ -49,5 +54,20 @@ def login_redir(request):
     return redirect('home')
 
 def all_lists(request):
-    return render(request,'todolist/all_lists.html')
+    low_imp = ToDoList.objects.filter(author=request.user, importance=1).order_by("-updated_at")
+    medium_imp = ToDoList.objects.filter(author=request.user, importance=2).order_by("-updated_at")
+    high_imp = ToDoList.objects.filter(author=request.user, importance=3).order_by("-updated_at")
+    return render(request,'todolist/all_lists.html', {
+        "low_imp": low_imp,
+        "medium_imp": medium_imp,
+        "high_imp": high_imp
+    })
+
+def single_list(request, slug):
+    project = ToDoList.objects.get(slug=slug)
+    if project.author != request.user:
+        raise PermissionDenied
+    return render(request, 'todolist/single_list.html',{
+        "project": project
+    })
 

@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
 from . import views
-from .views import RegisterView, FeaturesView
+from .views import RegisterView, FeaturesView, single_list
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('create-list', views.create_list, name='create-list'),
     path('login_redir', views.login_redir, name='login_redir'),
-    path('all-lists', views.all_lists, name='all-lists')
+    path('all-lists', views.all_lists, name='all-lists'),
+    path('all-lists/<slug:slug>', views.single_list, name='project')
 ]

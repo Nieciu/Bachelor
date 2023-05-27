@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+    <h3>ALL YOUR PROJECTS:</h3>
+    <div>
+        <h2>High importance</h2>
+        {% for list in high_imp %}
+            {% include 'todolist/project_small.html' %}
+        {% endfor %}
+        <h2>Medium importance</h2>
+        {% for list in medium_imp %}
+            {% include 'todolist/project_small.html' %}
+        {% endfor %}
+        <h2>Low importance</h2>
+        {% for list in low_imp %}
+            {% include 'todolist/project_small.html' %}
+        {% endfor %}
+    </div>
+</center>
+{% endblock  %}
