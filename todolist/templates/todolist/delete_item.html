@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<center>
+    <h1>Title: {{project.title}}</h1>
+    <form>
+        {% csrf_token %}
+        {% if project.listitem_set.all == null %}
+        <h4>No List Elelements To Delete</h4>
+        {% else %}
+        {% for element in project.listitem_set.all %}
+            {% if element.is_done %}
+            <h5><s>{{element.todo}}</s></h5>
+            {% else %}
+            <h5>{{element.todo}}</h5>
+            {% endif %}
+        {% endfor %}
+        <h4>
+            Type In element to delete
+        </h4>
+        {{form|crispy}}
+        {% endif %}
+        <center>
+        </center>
+    </form>
+</center>
+
+{% endblock  %}

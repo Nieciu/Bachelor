@@ -4,10 +4,29 @@
 
 <center>
     <h1>Title: {{project.title}}</h1>
-    <form>
         {% csrf_token %}
-        
-    </form>
+        {% if project.listitem_set.all == null %}
+        <h4>No List Elelements</h4>
+        {% else %}
+        {% for element in project.listitem_set.all %}
+            {% if element.is_done %}
+            <h5><a href="{% url 'edit-item' project.slug element.slug_item %}"><s>{{element.todo}}</s></a></h5>
+            {% else %}
+            <h5><a href="{% url 'edit-item' project.slug element.slug_item %}">{{element.todo}}</a></h5>
+            {% endif %}
+            
+        {% endfor %}
+        {% endif %}
+        <center>
+            <h3><a href="{% url 'create-item' project.slug %}">CREATE NEW ITEM</a></h3>
+            <h3>WRITE NAME OF THE ITEM YOU WANT TO DELETE AND CLICK DELETE</a></h3>
+            <form method="post">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="DELETE">
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </center>
 </center>
 
 {% endblock  %}

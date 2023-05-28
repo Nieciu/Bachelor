@@ -11,4 +11,15 @@ class ListItemForm(forms.ModelForm):
 
     class Meta:
         model = ListItem
-        fields = ("todo",'is_done',)
+        fields = ("todo",)
+
+class EditItemForm(forms.ModelForm):
+
+    class Meta:
+        model = ListItem
+        fields = ("todo", "is_done",)
+
+class DeleteForm(forms.Form):
+    delete = forms.CharField()
+
+        

@@ -4,12 +4,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 
 
-class ListTag(models.Model):
-    tag = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.tag
-    
 class ToDoList(models.Model):
     PRIORITY_CHOICES = (
         (1, 'Low'),
@@ -21,7 +15,6 @@ class ToDoList(models.Model):
     title = models.CharField(max_length=200, unique=True)
     made_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    list_tag = models.ForeignKey(ListTag, on_delete=models.SET_NULL, null=True)
     importance = models.IntegerField(choices=PRIORITY_CHOICES, default=2)
     slug = models.SlugField(default='', null=False)
     
@@ -33,9 +26,14 @@ class ToDoList(models.Model):
         super().save(*args, **kwargs)
 
 class ListItem(models.Model):
-    todo = models.CharField(max_length=500)
+    todo = models.CharField(max_length=100, unique=True)
     is_done = models.BooleanField(default=False)
-    todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
+    todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE, name='todolist')
+    slug_item = models.SlugField(default='', null=False)
+
+    def save(self, *args, **kwargs):
+        self.slug_item = slugify(self.todo)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.todo
